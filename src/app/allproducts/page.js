@@ -197,7 +197,7 @@ const YourComponent = () => {
                   currentPage * itemsPerPage
                 )
                 .map((product, index) => (
-                  <div className="group cursor-pointer relative">
+                  <div key={product.id} className="group cursor-pointer relative">
                     {/* Card */}
                     <div
                       onClick={() => addToCart(product)}

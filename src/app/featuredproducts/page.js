@@ -100,7 +100,7 @@ const FeaturedProducts = () => {
       <h2 className='text-2xl text-center my-8'>Featured Products</h2>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 my-4 mx-12">
         {featuredProducts.map(product => (
-           <div >
+           <div key={product.id}>
            <div className="hover:scale-110 transition transform duration-500">
              <Image
                src={product.image}

@@ -2,8 +2,6 @@ import './globals.css'
 import { Poppins } from 'next/font/google'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import { AuthProvider } from './AuthContext';
-import ProtectedRoute from './ProtectedRoute';
 import { CartProvider } from '../context/cartContext';
 
 const poppins = Poppins({ subsets: ['latin'],weight: '400' })
@@ -16,7 +14,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    <AuthProvider>
     <CartProvider>
       <body className={`${poppins.className} dark:bg-gray-900 dark:text-white`}>
         <Header />
@@ -24,7 +21,6 @@ export default function RootLayout({ children }) {
         <Footer />
         </body>
         </CartProvider>
-        </AuthProvider>
 
       
     </html>

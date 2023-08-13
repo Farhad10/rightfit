@@ -88,7 +88,7 @@ const Header = () => {
       ) : (
         <ul>
           {cart.map(item => (
-            <div className=''>
+            <div key={item.id} className=''>
             <li className="w-full border-b border-b-gray-500 py-6 flex " key={item.id}>
                  <div className='w-1/2'>
                     <Image
