@@ -86,7 +86,7 @@ const header = () => {
         <h6
           className="mb-4 flex items-center justify-center font-semibold uppercase md:justify-start">
         
-         Funny
+         Right Fit
         </h6>
         <p>
         The service primarily distributes films and television series produced by the media company of the same name from various genres, and it is available internationally in multiple languages.
@@ -131,18 +131,18 @@ const header = () => {
           >
         </p>
         <p className="mb-4">
-          <Link href="/pricing" className="text-gray-600 dark:text-gray-200"
-            >Pricing</Link
+          <Link href="/allproducts" className="text-gray-600 dark:text-gray-200"
+            >All Products</Link
           >
         </p>
         <p className="mb-4">
-          <Link href="/movie" className="text-gray-600 dark:text-gray-200"
-            >Movies</Link
+          <Link href="/featuredproducts" className="text-gray-600 dark:text-gray-200"
+            >Featured Products</Link
           >
         </p>
         <p className="mb-4">
-          <Link href="/shows" className="text-gray-600 dark:text-gray-200"
-            >Shows</Link
+          <Link href="/checkout" className="text-gray-600 dark:text-gray-200"
+            >Check Out</Link
           >
         </p>
        
@@ -215,7 +215,7 @@ const header = () => {
     <a
       className="font-semibold text-gray-600 dark:text-gray-400"
       href="/"
-      > Funny </a
+      > Right Fit </a
     >
   </div>
 </footer>

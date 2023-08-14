@@ -24,30 +24,26 @@ const Header = () => {
   return (
     <header>
     <nav className="bg-white bg-cover bg-center backdrop-filter backdrop-blur-sm z-50 fixed top-0 w-full bg-opacity-50 dark:bg-opacity-50  border-gray-800 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-        <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <Link href="/" className={`flex items-center
-              ${
-                activeLink === 1 ? '' : ''
-              }
-              `}
-              onClick={() => handleLinkClick(1)}
+        <div >
+           <div className="flex  justify-between items-center">
+            <Link href="/" className='flex'
             >
                 <Image width={40} height={40} src="/images/shoplogo.png" className="mr-3 rounded-lg" alt="PolyPlex Logo" />
-                <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white hidden lg:block">Shopy</span>
+                <span className="self-center text-xl font-semibold  whitespace-nowrap dark:text-white uppercase  ">Right Fit</span>
             </Link>
            
           
-            <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+            <div className="justify-between items-center lg:flex lg:w-auto " id="mobile-menu-2">
             <div className="flex items-center lg:order-2">
           
-            <div className='lg:mx-12 ml-6'>
+            <div className='lg:mx-12 mx-6'>
             {/* <ToolTip id="exampleTooltip" text="This is a tooltip"> */} 
             
        <DarkModeToggle />     
 {/* </ToolTip> */}
             </div>
           
-            <div className="flex flex-col items-center justify-center  py-2">
+            <div className="flex flex-col items-center mr-6 justify-center  py-2">
             {showSidebar ? (
           <button
             className="flex z-50 bg-[#c60000] rounded-md  items-center  transition transform hover:scale-125 duration-500 cursor-pointer fixed right-10 top-6 z-50"
@@ -78,7 +74,7 @@ const Header = () => {
               </Tooltip>
         )}
       
-        <div  className={`top-0 right-0 w-[30vw] overflow-y-auto dark:bg-gray-700 bg-gray-100 min-h-screen  p-10  text-white fixed h-full z-40  ease-in-out duration-300 ${
+        <div  className={`top-0 right-0 lg:w-[30vw] overflow-y-auto dark:bg-gray-700 bg-gray-100 min-h-screen  p-10  text-white fixed h-full z-40  ease-in-out duration-300 ${
     showSidebar ? "translate-x-0 " : "translate-x-full"
   }`}>
            <div className=''>
@@ -154,8 +150,8 @@ const Header = () => {
 }
              
             </div>
-       <ul className=" flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
-           <li className=' hover:scale-110 transition transform duration-500'>
+       <ul className="hidden lg:block lg:flex ">
+           <li className=' hover:scale-110 transition mx-4 transform duration-500'>
                <Link href="/allproducts" className={` py-2 pr-4 pl-3   border-b border-gray-100 lg:px-4 lg:py-2 rounded-lg hover:bg-[#c60000]  lg:border-0 hover:text-white
                  ${
                     activeLink === 1 ? 'bg-[#c60000] text-white ' : ''
@@ -178,27 +174,28 @@ const Header = () => {
          
        </ul>
    </div>
+   </div>
             {isMenuOpen && (
        <div className="lg:hidden z-50 absolute top-[100%] left-0 duration-500 transition-all bg-white dark:bg-gray-800 justify-between items-center w-full  lg:w-auto lg:order-1" id="mobile-menu-2">
        <ul className=" flex flex-col mt-4 text-center font-medium lg:flex-row lg:space-x-8 lg:mt-0">
            <li>
-               <Link href="/" className={`block py-2 pr-4 pl-3 hover:scale-110 transition transform duration-500     border-b border-gray-100 lg:px-4 lg:py-2 rounded-lg hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 dark: lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700
+               <Link href="/allproducts" className={`block py-2 pr-4 pl-3 hover:scale-110 transition transform duration-500     border-b border-gray-100 lg:px-4 lg:py-2 rounded-lg hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 dark: lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700
                  ${
                     activeLink === 1 ? ' text-blue-800' : ''
                   }
                   `}
                   onClick={() => handleLinkClick(1)}
-               >Home</Link>
+               >All Products</Link>
            </li>
       
            <li>
-               <Link href="/products" className={`block py-2 pr-4 pl-3 hover:scale-110 transition transform duration-500     border-b border-gray-100 lg:px-4 lg:py-2 rounded-lg hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 dark: lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700
+               <Link href="/featuredproducts" className={`block py-2 pr-4 pl-3 hover:scale-110 transition transform duration-500     border-b border-gray-100 lg:px-4 lg:py-2 rounded-lg hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 dark: lg:p-0 dark:text-white lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700
                 ${
                     activeLink === 3 ? ' text-blue-800' : ''
                   }
                   `}
                   onClick={() => handleLinkClick(3)}
-               >Products</Link>
+               >Featured Products</Link>
            </li>
           
        

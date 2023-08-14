@@ -15,8 +15,9 @@ const YourComponent = () => {
   // Define States
   const [data, setData] = useState(null);
   const [colorData, setColorData] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedMaterial, setSelectedMaterial] = useState(null);
   const [materialData, setMaterialData] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("all"); // Set to a default value
   const { addToCart, notification } = useCart();
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -39,12 +40,6 @@ const YourComponent = () => {
     return pageNumbers;
   };
 
-  // Function to handle the click event on a category.
-  const handleCategoryClick = (categoryId) => {
-    // Update the selected category based on the clicked category.
-    setSelectedCategory(categoryId);
-  };
-
   // Use Effect
   // Use a single useEffect for fetching all data
   useEffect(() => {
@@ -52,15 +47,10 @@ const YourComponent = () => {
     const fetchData = async () => {
       try {
         // Fetch product data based on selected category and current page
-        let productUrl;
-        if (selectedCategory && selectedCategory !== "all") {
-          productUrl = `https://api.sheety.co/af35b536915ec576818d468cf2a6505c/reactjsTest/products?colorId=${encodeURIComponent(
-            selectedCategory
-          )}`;
-        } else {
-          productUrl =
+      
+        const  productUrl =
             "https://api.sheety.co/af35b536915ec576818d468cf2a6505c/reactjsTest/products";
-        }
+    
 
         // Fetch material data
         const materialUrl =
@@ -133,31 +123,52 @@ const YourComponent = () => {
       }
     };
 
+    
+
     // Call the fetchData function to initiate data fetching
     fetchData();
-  }, [selectedCategory, currentPage]);
+  }, [currentPage]);
 
+  
+  const colorMap = {};
+  {colorData !== null ?
+  colorData.colors.forEach(color => {
+    colorMap[color.id] = color.name;
+  }) : ""}
+  
+  
+  const materialMap = {};
+  {materialData !== null ?
+  materialData.material.forEach(materials => {
+    materialMap[materials.id] = materials.name;
+  }):""}
+ 
   // console.log("material",materialData)
   return (
     <div className="lg:mt-20 mt-6 lg:flex">
       {notification && (
         <div className="notification mt-16 z-50">{notification}</div>
       )}
-      <div className="lg:w-[15%] text-center lg:border-r p-4 ">
+      <div className="lg:w-[15%] text-center flex justify-between px-16 lg:block lg:border-r p-4 ">
+       
+
         <div>
           <h2 className="text-xl my-6">Colors</h2>
+          <button
+  className={`hover:scale-110 border-b transition transform duration-500 text-md mt-2 uppercase ${
+    selectedColor === null ? 'text-red-500' : 'dark:text-white text-black'
+  }`}
+  onClick={() => setSelectedColor(null)}
+>
+  All
+</button>
           {colorData !== null ? (
             colorData.colors.map((curElem) => (
               <div key={curElem.id}>
-                <button
-                  className={`hover:scale-110 border-b transition transform duration-500 text-md mt-2 uppercase ${
-                    selectedCategory === curElem.id
-                      ? "text-[#c60000]"
-                      : "hover:text-[#c60000]"
-                  }`}
-                  onClick={() => handleCategoryClick(curElem.id)}
-                >
-                  {curElem.name}
+                   <button className={`hover:scale-110 border-b transition transform duration-500 text-md mt-2 uppercase ${
+                    selectedColor === curElem.id ? 'text-red-500' : 'dark:text-white text-black'}`}
+                onClick={() => setSelectedColor(curElem.id)}>
+                {curElem.name}
                 </button>
               </div>
             ))
@@ -167,17 +178,22 @@ const YourComponent = () => {
         </div>
         <div>
           <h2 className="text-xl my-6">Materials</h2>
+          <button
+  className={`hover:scale-110 border-b transition transform duration-500 text-md mt-2 uppercase ${
+    selectedMaterial === null ? 'text-red-500' : 'dark:text-white text-black'
+  }`}
+  onClick={() => setSelectedMaterial(null)}
+>
+  All
+</button>
           {materialData !== null ? (
             materialData.material.map((curElem) => (
               <div key={curElem.id}>
                 <button
-                  className={`hover:scale-110 border-b transition transform duration-500 text-md mt-2 uppercase ${
-                    selectedCategory === curElem.id
-                      ? "text-[#c60000]"
-                      : "hover:text-[#c60000]"
-                  }`}
-                  onClick={() => handleCategoryClick(curElem.id)}
-                >
+                 className={`hover:scale-110 border-b transition transform duration-500 text-md mt-2 uppercase ${
+                  selectedMaterial === curElem.id ? 'text-red-500' : 'dark:text-white text-black'}`}
+              onClick={() => setSelectedMaterial(curElem.id)}>
+    
                   {curElem.name}
                 </button>
               </div>
@@ -192,6 +208,10 @@ const YourComponent = () => {
           {data ? (
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 my-4 mx-12">
               {data.products
+               .filter(product => (
+                (selectedColor === null || product.colorId === selectedColor) &&
+                (selectedMaterial === null || product.materialId === selectedMaterial)
+              ))
                 .slice(
                   (currentPage - 1) * itemsPerPage,
                   currentPage * itemsPerPage
@@ -210,6 +230,11 @@ const YourComponent = () => {
                         height={500}
                         className="h-80 rounded-2xl"
                       />
+                        <div className="text-center flex justify-between px-2 text-lg mt-2">
+                     <div> {colorMap[product.colorId] || "----"}</div>
+                    <div>  {materialMap[product.materialId] || "----"}</div>
+                    </div>
+                    
 
                       <h2 className="text-center text-lg mt-2">
                         {product.name}
@@ -269,24 +294,7 @@ const YourComponent = () => {
                 </svg>
               </button>
             </Tooltip>
-            {generatePageNumbers(data?.products.length || 0, itemsPerPage).map(
-              (pageNumber) => {
-                const isInRange = Math.abs(pageNumber - currentPage) <= 2; // Adjust the range as needed
-                return isInRange ? (
-                  <button
-                    key={pageNumber}
-                    onClick={() => setCurrentPage(pageNumber)}
-                    className={
-                      pageNumber === currentPage
-                        ? "selected mx-4 hover:scale-125 transition transform duration-500"
-                        : "hover:scale-125 mx-4 transition transform duration-500"
-                    }
-                  >
-                    {pageNumber}
-                  </button>
-                ) : null;
-              }
-            )}
+           
             <Tooltip title="Next" position="top">
               <button
                 className=" mx-6 rounded-full border p-2 hover:scale-110 transition transform duration-500"

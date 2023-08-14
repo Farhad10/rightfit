@@ -38,12 +38,12 @@ export default function App() {
 
   <div className="absolute inset-0 bg-black opacity-60"></div>
 </div>
-        <div className=" absolute top-[25%] text-center w-full text-white  p-4 rounded-xl">
-       <div className="lg:text-7xl font-thin m-10">Go To Product Page</div>
+        <div className=" absolute top-[25%] lg:mx-32 text-center lg:text-left w-full text-white  p-4 rounded-xl">
+       <div className="lg:text-7xl font-thin my-10">Go To Product Page</div>
 {/* <div className="my-6 text-2xl">Streaming Now</div> */}
 <Link
-                href="/products">
-<Button text="Shop Now" />
+                href="/allproducts">
+<Button text="Browse all styles" />
 </Link>
              </div>
               
@@ -54,11 +54,11 @@ export default function App() {
 
   <div className="absolute inset-0 bg-black opacity-60"></div>
 </div>
-        <div className=" absolute top-[25%] text-center w-full text-white  p-4 rounded-xl">
-       <div className="lg:text-7xl m-10">Buy Now From Products</div>
+        <div className=" absolute top-[25%] lg:mx-32 text-center lg:text-left w-full text-white  p-4 rounded-xl">
+       <div className="lg:text-7xl my-10">Buy Now From Products</div>
 {/* <div className="my-6 text-2xl">40% Off On Chair</div> */}
 <Link
-                href="/products">
+                href="/allproducts">
 <Button text="Shop Now" />
 </Link>
              </div>
@@ -70,12 +70,12 @@ export default function App() {
 
   <div className="absolute inset-0 bg-black opacity-60"></div>
 </div>
-        <div className=" absolute top-[25%] text-center w-full text-white  p-4 rounded-xl">
-       <div className="lg:text-7xl m-10">Go Shop</div>
+        <div className=" absolute top-[25%] lg:mx-32 text-center lg:text-left w-full text-white  p-4 rounded-xl">
+       <div className="lg:text-7xl my-10">Go Shop</div>
 {/* <div className="my-6 text-2xl">25% Off On Chair</div> */}
 <Link
-                href="/products">
-<Button text="Shop Now" />
+                href="/allproducts">
+<Button text="Buy Now" />
 </Link>
              </div>
               
